@@ -1,8 +1,8 @@
-./extension/js/background.js
-./extension/js/content-script.js
-./extension/js/options.js
-./extension/js/popup.js
-./extension/manifest.json
+extension/js/background.js
+extension/js/content-script.js
+extension/js/options.js
+extension/js/popup.js
+extension/manifest.json
 
 node_modules/
 .idea/
