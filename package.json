@@ -1,7 +1,7 @@
 {
-  "name": "explore-extension",
+  "name": "chrome extension react template",
   "version": "1.0.0",
-  "description": "Amazon Explore Chrome Extension",
+  "description": "Chrome Extension React Template",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js && cp src/manifest.production.json extension/manifest.json",
