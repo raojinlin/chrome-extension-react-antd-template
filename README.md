@@ -8,7 +8,8 @@
 * 封装了通用的消息通信
 * 支持日志采集
 * 快速搭建项目
-* 支持环境配置(development/production/tests)
+* 支持环境配置(development/production)
+* 使用promise发送/等待消息响应
 
 ## 构建
 

@@ -7,11 +7,24 @@ export default class Message {
     this.logger = logger;
   }
 
+  /**
+   * 发送消息到后台
+   * @param subject
+   * @param data
+   * @return {Promise<unknown>}
+   */
   async sendMessage(subject, data) {
     this.logger.info(`send message ${subject}, ${data}`);
     return sendMessage({subject, data});
   }
 
+  /**
+   * 发送消息到查询到的tabs
+   * @param query {{object}}
+   * @param subject {string}
+   * @param data {*}
+   * @return {Promise<unknown[]>}
+   */
   async sendMessageToTabs(query, subject, data) {
     return sendMessageToTabs(query, {subject, data});
   }
@@ -31,6 +44,12 @@ export default class Message {
     return this;
   }
 
+  /**
+   * 删除监听者
+   * @param subject
+   * @param listener
+   * @return {boolean}
+   */
   removeListener(subject, listener) {
     if (!this.listeners[subject]) {
       return false;
@@ -45,6 +64,13 @@ export default class Message {
     return true;
   }
 
+  /**
+   * 分发消息改subject的监听者
+   * @param request {{subject: string, data}}
+   * @param sender {string}
+   * @param sendResponse {(function(res: *))}
+   * @return {Promise<boolean>}
+   */
   async dispatch(request, sender, sendResponse) {
     const { subject, data } = request;
     const listeners = this.listeners[subject];
