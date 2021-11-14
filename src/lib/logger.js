@@ -31,16 +31,18 @@ export class ConsoleHandler extends AbstractLoggerHandler {
   }
 }
 
-class HttpHandler extends AbstractLoggerHandler {
-  constructor() {
+export class HttpHandler extends AbstractLoggerHandler {
+  constructor(url) {
     super();
-    this.consoleHnalder = new ConsoleHandler();
+    this.url = url;
   }
 
   emit(msg, level) {
     if (!level) {
       level = 'INFO';
     }
+
+    fetch(`${this.url}/${level}?message=${encodeURIComponent(msg)}`);
   }
 }
 
