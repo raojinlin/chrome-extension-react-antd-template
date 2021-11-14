@@ -1,4 +1,4 @@
-# Chrome Extension React Template
+# Chrome Extension React Antd Template
 
 
 这是一个Chrome插件的项目模板，支持react，UI库使用了antd。抽象了一些常见的基础库，如日志、消息通信。可以快速构建出一个react的插件。
