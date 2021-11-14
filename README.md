@@ -90,14 +90,14 @@ message.sendMessage('ping').then(response => {
 日志类，支持console和http方式记录日志。
 
 ```js
-import { Logger, HttpHandler, ConsoleLogger } from "./lib/logger";
+import { Logger, HttpHandler, ConsoleHandler } from "./lib/logger";
 
 // 使用HTTP记录日志到服务器
 const logger = new Logger('HTTP', new HttpHandler('https://log.youdomain.com/collect/'));
 logger.info('some message from client');
 
 // 记录日志到控制台
-const consoleLogger = new Logger('CONSOLE', new ConsoleLogger());
+const consoleLogger = new Logger('CONSOLE', new ConsoleHandler());
 consoleLogger.info('message to console');
 
 ```
