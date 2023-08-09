@@ -5,17 +5,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js && cp src/manifest.production.json extension/manifest.json",
+    "start": "webpack --config webpack.config.js && cp src/manifest.production.json extension/manifest.json",
     "build-dev": "ENV=development webpack --config webpack.config.js && cp src/manifest.development.json extension/manifest.json"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "antd": "^3.26.16",
+    "antd": "^5.8.2",
     "lodash": "^4.17.11",
     "mem": "^9.0.1",
     "moment": "^2.29.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "slash2": "^2.0.0",
     "style-loader": "^0.23.1"
   },

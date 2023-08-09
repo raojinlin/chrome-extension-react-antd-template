@@ -1,26 +1,37 @@
 # Chrome Extension React Antd Template
 
 
-这是一个基于React和Antd UI库的Chrome插件模板项目。该模板封装了一些常见的基础库，如日志和消息通信，可用于快速构建React插件。
+这是一个基于React和Ant Desigin UI库的Chrome插件模板项目。该模板封装了一些常见的基础库，如日志和消息通信，可用于快速构建React插件。
+
+版本信息：
+1. Ant design: 5.8.2
+2. React: 18.2.0
 
 
 ## 特性
 * 支持react
+* 支持less
+* 支持ts
 * 封装了通用的消息通信
 * 支持日志采集
 * 快速搭建项目
 * 支持环境配置(development/production)
 * 使用promise发送/等待消息响应
 
-## 构建
+## 使用
+node版本在10以上。
 
+1. 克隆本项目
+
+2. 构建插件
 ```bash
 $ npm install
 $ npm run build
 ```
 
-构建后会在```extension```生成相应的文件。在浏览器加载插件就可以运行了。
+3. 构建后会在```extension```生成相应的文件。在浏览器加载插件就可以运行了。
 
+![](./screenshot/install.png)
 
 ## 截图
 
