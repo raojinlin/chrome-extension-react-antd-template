@@ -1,9 +1,11 @@
 const path = require('path');
 const slash = require('slash');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const env = process.env.ENV || 'production';
 const isDev = env === 'development';
 const classNamePrefix = 'web-extension';
+
 
 const config = {
     mode: env,
@@ -11,7 +13,7 @@ const config = {
         'js/background': path.resolve(__dirname, './src/background.js'),
         'js/popup': path.resolve(__dirname, './src/popup.js'),
         'js/options': path.resolve(__dirname, './src/options.js'),
-        'js/content-script': path.resolve(__dirname, './src/content-script.js')
+        'js/content-script': path.resolve(__dirname, './src/content-script.js'),
     },
     output: {
         path: path.resolve(__dirname, 'extension/'),
@@ -21,7 +23,6 @@ const config = {
             '@': path.resolve(__dirname, 'src')
         }
     },
-    stats: 'verbose',
     module: {
         rules: [
             {
@@ -133,7 +134,14 @@ const config = {
         inline: true,
         hot: true,
         proxy: {}
-    }
+    },
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                {from: path.join(__dirname, `./src/manifest.${env}.json`), to: path.join(__dirname, './extension/manifest.json')}
+            ]
+        })
+    ]
 };
 
 module.exports = config;
