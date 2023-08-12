@@ -22,11 +22,14 @@
 node版本在10以上。
 
 1. 克隆本项目
-
+```shell
+git clone https://github.com/raojinlin/chrome-extension-react-antd-template.git
+cd chrome-extension-react-antd-template
+```
 2. 构建插件
 ```bash
-$ npm install
-$ npm run build
+npm install
+npm run build
 ```
 
 3. 构建后会在```extension```生成相应的文件。在浏览器加载插件就可以运行了。
