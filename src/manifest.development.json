@@ -2,26 +2,32 @@
   "name": "浏览器插件模板",
   "description": "浏览器插件模板 - 描述",
   "version": "1.0.0",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "background": {
-    "scripts": [
-      "js/background.js"
-    ],
-    "persistent": true
+    "service_worker": "js/background.js"
   },
   "web_accessible_resources": [
-    "images/*"
+    {
+      "resources": [
+        "images/*"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
   ],
   "options_page": "options.html",
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "default_locale": "zh_CN",
   "permissions": [
     "storage",
     "tabs",
     "cookies",
+    "contextMenus"
+  ],
+  "host_permissions": [
     "https://www.baidu.com/*"
   ],
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "/images/chrome-icon.png",
