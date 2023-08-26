@@ -8,11 +8,7 @@ export const getURL = (resource) => {
 };
 
 export const sendMessage = async message => {
-  return new Promise(resolve => {
-    chrome.runtime.sendMessage(message, response => {
-      resolve(response);
-    });
-  });
+  return chrome.runtime.sendMessage(message);
 };
 
 export const queryTabs = async (query) => {
@@ -20,19 +16,11 @@ export const queryTabs = async (query) => {
     return [];
   }
 
-  return new Promise(resolve => {
-    chrome.tabs.query(query || {}, tabs => {
-      resolve(tabs);
-    });
-  });
+  return chrome.tabs.query(query || {});
 };
 
 export const sendMessageToTab = async (tabID, message) => {
-  return new Promise(resolve => {
-    chrome.tabs.sendMessage(tabID, message, response => {
-      resolve(response);
-    });
-  });
+  return chrome.tabs.sendMessage(tabID, message);
 }
 
 export const sendMessageToTabs = async (query, message) => {

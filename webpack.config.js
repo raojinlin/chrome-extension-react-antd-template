@@ -1,6 +1,7 @@
 const path = require('path');
 const slash = require('slash');
 const CopyPlugin = require("copy-webpack-plugin");
+const WebpackBar = require('webpackbar');
 
 const env = process.env.ENV || 'production';
 const isDev = env === 'development';
@@ -9,6 +10,7 @@ const classNamePrefix = 'web-extension';
 
 const config = {
     mode: env,
+    devtool: isDev ? 'source-map' : false,
     entry: {
         'js/background': path.resolve(__dirname, './src/background.js'),
         'js/popup': path.resolve(__dirname, './src/popup.js'),
@@ -136,6 +138,7 @@ const config = {
         proxy: {}
     },
     plugins: [
+        new WebpackBar(),
         new CopyPlugin({
             patterns: [
                 {from: path.join(__dirname, `./src/manifest.${env}.json`), to: path.join(__dirname, './extension/manifest.json')}
