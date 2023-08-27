@@ -1,7 +1,4 @@
-extension/js/background.js
-extension/js/content-script.js
-extension/js/options.js
-extension/js/popup.js
+extension/js/*.js
 extension/manifest.json
 
 node_modules/

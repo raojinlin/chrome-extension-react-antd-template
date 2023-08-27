@@ -71,7 +71,7 @@ export default class Message {
    * @param sendResponse {(function(res: *))}
    * @return {Promise<boolean>}
    */
-  async dispatch(request, sender, sendResponse) {
+  dispatch(request, sender, sendResponse) {
     const { subject, data } = request;
     const listeners = this.listeners[subject];
     if (!listeners || !listeners.length) {

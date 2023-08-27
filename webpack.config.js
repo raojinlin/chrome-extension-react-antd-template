@@ -25,6 +25,17 @@ const config = {
             '@': path.resolve(__dirname, 'src')
         }
     },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'js/vendors',
+                    chunks: chunk => chunk.name !== 'js/background',
+                },
+            }
+        }
+    },
     module: {
         rules: [
             {

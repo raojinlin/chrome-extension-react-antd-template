@@ -42,6 +42,7 @@
         "https://www.baidu.com/*"
       ],
       "js": [
+        "js/vendors.js",
         "js/content-script.js"
       ],
       "run_at": "document_end",
