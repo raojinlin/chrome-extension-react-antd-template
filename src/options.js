@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDom from 'react-dom/client';
 
 
 function Options({ }) {
@@ -11,7 +11,7 @@ function Options({ }) {
 }
 
 function main(container) {
-  ReactDom.render(<Options />, container);
+  ReactDom.createRoot(container).render(<Options />);
 }
 
 

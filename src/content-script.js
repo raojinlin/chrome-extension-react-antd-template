@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDom from 'react-dom/client';
 import { getURL } from "./lib/brower";
 import Message from "./lib/message";
 import {Logger, ConsoleHandler} from "./lib/logger";
@@ -28,7 +28,7 @@ function main() {
   });
 
   document.body.prepend(container);
-  ReactDom.render(<ContentScript />, container);
+  ReactDom.createRoot(container).render(<ContentScript />);
 }
 
 main();
