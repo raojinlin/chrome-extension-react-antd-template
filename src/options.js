@@ -1,14 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom/client';
+import Options from './components/Options';
 
-
-function Options({ }) {
-  return (
-    <div>
-      <a target='_blank' href="https://developer.chrome.com/docs/extensions/mv3/options/">Options page</a>
-    </div>
-  );
-}
 
 function main(container) {
   ReactDom.createRoot(container).render(<Options />);

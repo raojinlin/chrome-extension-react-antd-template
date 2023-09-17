@@ -1,6 +1,6 @@
 import React from 'react';
-import Popup from "./components/Popup";
 import ReactDom from 'react-dom/client';
+import Popup from "./components/Popup";
 
 
 function main(container) {
