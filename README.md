@@ -22,6 +22,16 @@
 ## 使用
 node版本在16以上。
 
+1. 使用[`@raojinlin/create-chrome-extension`](https://github.com/raojinlin/create-chrome-extension)快速启动
+```bash
+$ npx @raojinlin/create-chrome-extension my-extension
+$ cd my-extension
+$ npm run build
+```
+
+![](./screenshot/npx-create-chrome-extension.png)
+
+
 1. 克隆本项目
 ```shell
 git clone https://github.com/raojinlin/chrome-extension-react-antd-template.git
@@ -126,3 +136,7 @@ import { getURL } from "./brower";
 
 getURL('/images/chrome-icon.png');
 ```
+
+
+请注意，这只是一个基本的创建Chrome扩展应用，具体的配置和功能取决于你的项目需求。你可能需要查阅Chrome扩展开发文档以深入了解如何定制你的扩展。
+
