@@ -3,4 +3,5 @@ extension/manifest.json
 
 node_modules/
 .idea/
-*.js.map
+*.map
+*.LICENSE.txt
