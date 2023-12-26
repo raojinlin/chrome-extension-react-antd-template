@@ -1,11 +1,9 @@
 const path = require('path');
-const slash = require('slash');
 const CopyPlugin = require("copy-webpack-plugin");
 const WebpackBar = require('webpackbar');
 
 const env = process.env.ENV || 'production';
 const isDev = env === 'development';
-const classNamePrefix = 'web-extension';
 
 
 const config = {
@@ -54,8 +52,8 @@ const config = {
                                 "@babel/plugin-proposal-decorators",
                                 {"decoratorsBeforeExport": true}
                             ],
-                            '@babel/plugin-proposal-object-rest-spread',
-                            '@babel/plugin-proposal-class-properties',
+                            '@babel/plugin-transform-object-rest-spread',
+                            '@babel/plugin-transform-class-properties',
                             '@babel/plugin-syntax-dynamic-import',
                             '@babel/plugin-transform-regenerator',
                             "@babel/plugin-transform-computed-properties",
@@ -73,41 +71,26 @@ const config = {
                 use: [
                     {
                         loader: 'style-loader',
+                        options: {
+                            injectType: 'styleTag'
+                        },
                     },
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
                             sourceMap: isDev,
-                            getLocalIdent: (context, localIdentName, localName, options) => {
-                                if (context.resourcePath.includes('node_modules') || context.resourcePath.includes('global.less')) {
-                                    return localName;
-                                }
-
-                                const match = context.resourcePath.match(/src(.*)/);
-                                if (match && match[1]) {
-                                    const antdProPath = match[1].replace('.less', '').replace('.css', '');
-                                    const arr = slash(antdProPath)
-                                        .split('/')
-                                        .map(a => a.replace(/([A-Z])/g, '-$1'))
-                                        .map(a => a.toLowerCase());
-                                    return `${classNamePrefix}-${arr.join('-')}-${localName}`.replace(/--/g, '-');
-                                }
-
-                                return localName;
-                            },
+                            modules: {
+                                localIdentName: isDev ? "[path][name]_[local]-[hash:base64:5]" : '[local].[hash:base64:5]',
+                            }, 
                         }
                     },
                     {
                         loader: 'less-loader',
                         options: {
-                            modules: true,
-                            sourceMap: isDev,
-                            javascriptEnabled: true,
-                            modifyVars: {
-                                'primary-color': '#fb9332',
-                                'link-color': '#fb9332',
-                            },
+                            lessOptions: {
+                                sourceMap: isDev,
+                                modules: true,
+                            }
                         },
                     }
                 ],
@@ -154,9 +137,8 @@ const config = {
             patterns: [
                 {from: path.join(__dirname, `./src/manifest.${env}.json`), to: path.join(__dirname, './extension/manifest.json')}
             ]
-        })
+        }),
     ]
 };
 
 module.exports = config;
-
