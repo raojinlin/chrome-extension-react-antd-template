@@ -19,7 +19,6 @@
     "browserslist": "^4.22.2",
     "core-js": "^3.9.1",
     "date-fns": "^3.0.6",
-    "exceljs": "^4.4.0",
     "lodash": "^4.17.11",
     "luxon": "^3.4.4",
     "mem": "^9.0.1",

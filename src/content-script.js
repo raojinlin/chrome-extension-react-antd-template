@@ -4,8 +4,10 @@ import { getURL } from "./lib/brower";
 import Message from "./lib/message";
 import {Logger, ConsoleHandler} from "./lib/logger";
 import Example from './components/Example';
+import { getConfig } from './lib/config';
 
-const logger = new Logger('ContentScript', new ConsoleHandler());
+const config = getConfig(process.env.NODE_ENV);
+const logger = Logger.createLogger('ContentScript', config.logger.handler, config.logger.options);
 
 function ContentScript({ }) {
   return (

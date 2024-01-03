@@ -29,9 +29,6 @@ $ cd my-extension
 $ npm run build
 ```
 
-![](./screenshot/npx-create-chrome-extension.png)
-
-
 1. 克隆本项目
 ```shell
 git clone https://github.com/raojinlin/chrome-extension-react-antd-template.git
@@ -43,7 +40,24 @@ npm install
 npm run build
 ```
 
-3. 构建后会在```extension```生成相应的文件。在浏览器加载插件就可以运行了。
+3. 插件开发
+
+自动编译代码。编译完成后需要重新加载插件。
+
+![Alt text](./screenshot/image.png)
+
+- Linux或Mac
+```bash
+npm run start
+```
+
+- Windows
+```cmd
+start.bat
+```
+
+
+4. 构建后会在```extension```生成相应的文件。在浏览器加载插件就可以运行了。
 
 ![](./screenshot/install.png)
 
@@ -64,24 +78,25 @@ Popup
 
 ## 项目布局
 
+### ```src/manifest.development.js```
+开发环境的manifest配置
+
+### ```src/manifest.production.js```
+生产环境的manifest配置
+
 ### ```/src/backgorund.js```
 后台脚本入口
 
-
 ### ```/src/content-scripts.js```
-
 内容脚本入口
 
 ### ```/src/content-options.js```
-
 插件配置入口
 
 ### ```/src/components/```
-
 一些通用的react组件
 
 ### ```/src/lib```
-
 一些通用的库，如日志、消息通信、浏览器接口相关的函数
 
 #### ```/src/lib/message.js```
@@ -127,6 +142,18 @@ logger.info('some message from client');
 const consoleLogger = new Logger('CONSOLE', new ConsoleHandler());
 consoleLogger.info('message to console');
 
+```
+
+### ```src/config.[test|prod|local].js```
+这个目录放置了插件的配置文件，test、prod、local分别表示三个不同的环境。默认使用local(development)环境。
+
+其中，default配置表示全局配置，在test或者prod环境下可以覆盖default的配置。
+
+#### 获取配置
+```js
+import { getConfig } from './lib/config';
+
+const config = getConfig(process.env.NODE_ENV); 
 ```
 
 ### 在content-script使用插件内的资源（文件、html、css等）
