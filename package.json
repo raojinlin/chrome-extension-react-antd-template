@@ -14,7 +14,6 @@
     "@webpack-cli/serve": "^2.0.5",
     "antd": "^5.8.2",
     "core-js": "^3.9.1",
-    "exceljs": "^4.4.0",
     "lodash": "^4.17.11",
     "mem": "^9.0.1",
     "moment": "^2.29.1",

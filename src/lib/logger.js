@@ -1,3 +1,4 @@
+import { extend } from "lodash";
 import moment from "moment";
 
 const LOG_LEVEL_INFO = 'INFO';
@@ -13,6 +14,10 @@ export class AbstractLoggerHandler {
 
 
 export class ConsoleHandler extends AbstractLoggerHandler {
+  constructor(options) {
+    super(options);
+  }
+
   emit(msg, level='INFO') {
     switch (level) {
       case LOG_LEVEL_INFO:
@@ -31,10 +36,38 @@ export class ConsoleHandler extends AbstractLoggerHandler {
   }
 }
 
+
+class LoggerFormatter {
+  format(loggerName, level, msg) {}
+}
+
+
+class DefaultFormatter extends LoggerFormatter {
+  format(loggerName, msg, level) {
+    return `${moment().format()} ${loggerName} [${level}]: ${msg}`;
+  }
+}
+
+
+class JSONFormatter extends LoggerFormatter {
+  format(loggerName, msg, level) {
+    return {
+      time: moment().format(),
+      name: loggerName,
+      level,
+      msg
+    }
+  }
+}
+
+
 export class HttpHandler extends AbstractLoggerHandler {
-  constructor(url) {
-    super();
-    this.url = url;
+  constructor(options) {
+    super(options);
+    this.options = options;
+    if (this.options.format === 'json') {
+      this.formatter = new JSONFormatter();
+    }
   }
 
   emit(msg, level) {
@@ -42,7 +75,13 @@ export class HttpHandler extends AbstractLoggerHandler {
       level = 'INFO';
     }
 
-    fetch(`${this.url}/${level}?message=${encodeURIComponent(msg)}`);
+    fetch(this.options.url, {
+      method: this.options.method || 'POST',
+      body: JSON.stringify(msg),
+      headers: {
+        'content-type': 'application/json',
+      }
+    })
   }
 }
 
@@ -61,6 +100,7 @@ export class Logger {
     this.loggerName = name;
     this.handler = handler;
     this._debug = false;
+    this.formatter = new DefaultFormatter();
   }
 
   setDebug(debug) {
@@ -77,7 +117,7 @@ export class Logger {
     return `${moment().format()} ${loggerName} [${level}]: ${msg}`;
   }
 
-  static messagesToString(...msg) {
+  static messageStringify(...msg) {
     return msg.map(item => {
       if (item instanceof Error) {
         return item;
@@ -88,7 +128,7 @@ export class Logger {
   }
 
   info(...msg) {
-    this.handler.emit(Logger.getFormattedMessage(this.loggerName, Logger.messagesToString(...msg), Logger.INFO), 'INFO');
+    this.handler.emit(this.formatter.format(this.loggerName, Logger.messageStringify(...msg), Logger.INFO), 'INFO');
   }
 
   debug(...msg) {
@@ -96,14 +136,24 @@ export class Logger {
       return;
     }
 
-    this.handler.emit(Logger.getFormattedMessage(this.loggerName, Logger.messagesToString(...msg), Logger.DEBUG), 'DEBUG');
+    this.handler.emit(this.formatter.format(this.loggerName, Logger.messageStringify(...msg), Logger.DEBUG), 'DEBUG');
   }
 
   error(...msg) {
-    this.handler.emit(Logger.getFormattedMessage(this.loggerName, Logger.messagesToString(...msg), Logger.ERROR), 'ERROR');
+    this.handler.emit(this.formatter.format(this.loggerName, Logger.messageStringify(...msg), Logger.ERROR), 'ERROR');
   }
 
-  static createLogger(loggerName) {
-    return new Logger(loggerName, new ConsoleHandler());
+  static createLogger(loggerName, handlerName, handlerOptions) {
+    const handlers = {console: ConsoleHandler, http: HttpHandler};
+    if (!handlerName) {
+      handlerName = 'console';
+    }
+
+    const logger = new Logger(loggerName, new handlers[handlerName](handlerOptions));
+    if (handlerOptions.formatter === 'json') {
+      logger.formatter = new JSONFormatter();
+    }
+
+    return logger;
   }
 }
