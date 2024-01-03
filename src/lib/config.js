@@ -3,11 +3,12 @@ const envNames = {
     test: 'test',
     production: 'prod',
     prod: 'prod',
+    default: 'default',
 };
 
 
 const getEnvConfig = env => {
-    return require(`../config/config.${env}`).default;
+    return require(`../config/config.${envNames[env] || 'prod'}`).default;
 }
 
 /**
@@ -17,6 +18,6 @@ const getEnvConfig = env => {
  */
 export function getConfig(env) {
     const envConfig = getEnvConfig(env);
-    const defaultConfig = getConfig('default');
+    const defaultConfig = getEnvConfig('default');
     return Object.assign({}, defaultConfig, envConfig);
 }
