@@ -5,10 +5,11 @@ const Example = () => {
   const handleClick = React.useCallback(() => {
     message.info("hello");
   }, []);
-  return ( 
+
+  return (
     <Space wrap>
       <Button onClick={handleClick} type="primary">Primary Button</Button>
-      <Button>Default Button</Button>
+      <Button onClick={handleClick}>Default Button</Button>
       <Button type="dashed">Dashed Button</Button>
       <Button type="text">Text Button</Button>
       <Button type="link">Link Button</Button>

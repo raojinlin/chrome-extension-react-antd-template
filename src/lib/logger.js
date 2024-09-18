@@ -150,7 +150,7 @@ export class Logger {
     }
 
     const logger = new Logger(loggerName, new handlers[handlerName](handlerOptions));
-    if (handlerOptions.formatter === 'json') {
+    if (handlerOptions?.formatter === 'json') {
       logger.formatter = new JSONFormatter();
     }
 
