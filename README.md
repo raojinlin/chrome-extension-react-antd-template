@@ -42,8 +42,9 @@ npm run build
 
 3. 插件开发
 
-自动编译代码。编译完成后自动加载插件。
+自动编译代码, 编译完成后会自动加载插件。
 
+如果没有自动刷新插件，请点击下面的按键刷新。
 ![Alt text](./screenshot/image.png)
 
 - Linux或Mac
