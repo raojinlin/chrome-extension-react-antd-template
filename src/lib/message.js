@@ -71,7 +71,7 @@ export default class Message {
    * @param sendResponse {(function(res: *))}
    * @return {Promise<boolean>}
    */
-  dispatch(request, sender, sendResponse) {
+  async dispatch(request, sender, sendResponse) {
     const { subject, data } = request;
     const listeners = this.listeners[subject];
     if (!listeners || !listeners.length) {
@@ -82,7 +82,10 @@ export default class Message {
     this.logger.info(`dispatch ${subject} to ${listeners.length} listeners`);
     for (let i = 0; i < listeners.length; i++) {
       const handler = listeners[i];
-      handler(request, sender, sendResponse);
+      const retval = handler(request, sender, sendResponse);
+      if (retval?.then) {
+        await retval;
+      }
     }
 
     return true;

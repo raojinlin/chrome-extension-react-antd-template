@@ -9,7 +9,7 @@
 
 
 ## 特性
-* 代码实时构建
+* 代码实时构建、插件自动加载
 * 支持react
 * 支持less
 * 支持ts
@@ -42,8 +42,9 @@ npm run build
 
 3. 插件开发
 
-自动编译代码。编译完成后需要重新加载插件。
+自动编译代码, 编译完成后会自动加载插件。
 
+如果没有自动刷新插件，请点击下面的按键刷新。
 ![Alt text](./screenshot/image.png)
 
 - Linux或Mac
@@ -148,6 +149,33 @@ consoleLogger.info('message to console');
 这个目录放置了插件的配置文件，test、prod、local分别表示三个不同的环境。默认使用local(development)环境。
 
 其中，default配置表示全局配置，在test或者prod环境下可以覆盖default的配置。
+
+#### 配置项
+
+```js
+{
+  // 日志配置
+  logger: {
+    // 日志handler: console|http
+    handler: 'console',
+    // handler参数
+    options: {
+      url: 'https://api.mywebsite.com/api/v1/clientlogs',
+      method: 'POST',
+      formatter: 'json',
+    },
+  },
+  // webpack 插件配置
+  plugins: {
+    // 自动重载配置
+    reload: {
+      // 监听端口
+      port: 8082,
+    }
+  }
+},
+```
+
 
 #### 获取配置
 ```js
