@@ -17,7 +17,7 @@ function main() {
     eventSource.onmessage = data => {
       if (data.data === 'reload') {
         logger.info('reload extension ...')
-        sendMessageToTabs({ currentWindow: true }, { 'subject': 'reload' }).then(r => {
+        sendMessageToTabs({currentWindow: true}, {'subject': 'reload'}).then(r => {
           chrome.runtime.reload();
         }).catch((err) => {
           logger.error('send message to tabs error: ', err.message);
