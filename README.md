@@ -181,7 +181,7 @@ consoleLogger.info('message to console');
 ```js
 import { getConfig } from './lib/config';
 
-const config = getConfig(process.env.NODE_ENV); 
+const config = getConfig(process.env.ENV); 
 ```
 
 ### 在content-script使用插件内的资源（文件、html、css等）

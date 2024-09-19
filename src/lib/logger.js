@@ -1,5 +1,4 @@
-import { extend } from "lodash";
-import moment from "moment";
+import { formatISO } from 'date-fns';
 
 const LOG_LEVEL_INFO = 'INFO';
 const LOG_LEVEL_ERROR = 'ERROR';
@@ -44,7 +43,7 @@ class LoggerFormatter {
 
 class DefaultFormatter extends LoggerFormatter {
   format(loggerName, msg, level) {
-    return `${moment().format()} ${loggerName} [${level}]: ${msg}`;
+    return `${formatISO(new Date)} ${loggerName} [${level}]: ${msg}`;
   }
 }
 
@@ -52,7 +51,7 @@ class DefaultFormatter extends LoggerFormatter {
 class JSONFormatter extends LoggerFormatter {
   format(loggerName, msg, level) {
     return {
-      time: moment().format(),
+      time: formatISO(new Date),
       name: loggerName,
       level,
       msg
@@ -114,7 +113,7 @@ export class Logger {
   }
 
   static getFormattedMessage(loggerName, msg, level) {
-    return `${moment().format()} ${loggerName} [${level}]: ${msg}`;
+    return `${formatISO(new Date)} ${loggerName} [${level}]: ${msg}`;
   }
 
   static messageStringify(...msg) {

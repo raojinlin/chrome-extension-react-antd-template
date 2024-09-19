@@ -4,9 +4,9 @@
   "description": "Chrome Extension React Template",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js",
-    "start": "ENV=development webpack watch --config webpack.config.js",
-    "build-dev": "ENV=development webpack --config webpack.config.js"
+    "build": "webpack --env ENV=production --config webpack.config.js",
+    "start": "webpack watch --env ENV=development --config webpack.config.js",
+    "build-dev": "webpack --env ENV=development --config webpack.config.js"
   },
   "repository": "https://github.com/raojinlin/chrome-extension-react-antd-template.git",
   "author": "",
@@ -18,11 +18,10 @@
     "antd": "^5.8.2",
     "browserslist": "^4.22.2",
     "core-js": "^3.9.1",
-    "date-fns": "^3.0.6",
+    "date-fns": "^3.6.0",
     "lodash": "^4.17.11",
     "luxon": "^3.4.4",
     "mem": "^9.0.1",
-    "moment": "^2.29.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "slash2": "^2.0.0"
@@ -49,6 +48,7 @@
     "raw-loader": "^4.0.2",
     "slash": "^3.0.0",
     "style-loader": "^3.3.3",
+    "terser-webpack-plugin": "^5.3.10",
     "ts-loader": "^6.0.1",
     "tsc": "^1.20150623.0",
     "typescript": "^3.4.5",

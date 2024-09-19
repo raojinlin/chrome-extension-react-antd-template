@@ -6,7 +6,7 @@ import Message from "./lib/message";
 import { Logger } from "./lib/logger";
 import { getConfig } from './lib/config';
 
-const config = getConfig(process.env.NODE_ENV);
+const config = getConfig(process.env.ENV);
 const logger = Logger.createLogger('ContentScript', config.logger.handler, config.logger.options);
 
 
