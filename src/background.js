@@ -6,11 +6,11 @@ import { getConfig } from "./lib/config";
 
 const logger = new Logger('background', new ConsoleHandler());
 const message = new Message(logger);
-const config = getConfig(process.env.NODE_ENV);
-const isDev = process.env.NODE_ENV === 'development';
+const config = getConfig(process.env.ENV);
+const isDev = process.env.ENV === 'development';
 
 function main() {
-  logger.info('hello, background');
+  logger.info('hello, background, env=' + process.env.ENV);
   // 监听代码更新
   if (isDev) {
     const eventSource = new EventSource(`http://localhost:${config.plugins.reload.port}/`);

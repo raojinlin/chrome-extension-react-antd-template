@@ -5,3 +5,4 @@ node_modules/
 .idea/
 *.map
 *.LICENSE.txt
+env.js

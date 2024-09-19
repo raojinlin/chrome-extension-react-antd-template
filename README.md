@@ -1,5 +1,6 @@
 # Chrome Extension React Antd Template
 
+![Node.js CI workflows](https://github.com/raojinlin/chrome-extension-react-antd-template/actions/workflows/node.js.yml/badge.svg?event=push)
 
 这是一个基于React和Ant Desigin UI库的Chrome插件模板项目。该模板封装了一些常见的基础库，如日志和消息通信，可用于快速构建React插件。
 
@@ -181,7 +182,7 @@ consoleLogger.info('message to console');
 ```js
 import { getConfig } from './lib/config';
 
-const config = getConfig(process.env.NODE_ENV); 
+const config = getConfig(process.env.ENV); 
 ```
 
 ### 在content-script使用插件内的资源（文件、html、css等）
