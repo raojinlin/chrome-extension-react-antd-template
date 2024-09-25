@@ -50,7 +50,7 @@ npm run build
 
 - Linux或Mac
 ```bash
-npm run start
+npm start
 ```
 
 - Windows
